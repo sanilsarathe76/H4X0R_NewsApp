@@ -12,9 +12,9 @@
 
 import Foundation
 
-class NetworkManager {
-    
-    static let shared = NetworkManager()
+class NetworkManager: ObservableObject {
+        
+    @Published var posts = [Post]()
     
     func fetchData() {
         if let url = URL(string: "https://hn.algolia.com/api/v1/search?tags=front_page") {
@@ -24,27 +24,28 @@ class NetworkManager {
     
     func performRequest(with url: URL) {
         let session = URLSession(configuration: .default)
+        
         let task = session.dataTask(with: url) { (data, response, error) in
             if let safeError = error {
                 print(safeError.localizedDescription)
             }
             
             if let safeData = data {
-                let decodedData = self.parseJSON(data: safeData)
+                let decodedData = self.parseJSON(safeData)
                 print(decodedData)
             }
         }
         task.resume()
     }
     
-    func parseJSON(data: Data) -> Results {
+    func parseJSON(_ data: Data) -> Results? {
         let decoder = JSONDecoder()
         do {
             let results = try decoder.decode(Results.self, from: data)
             return results
         } catch {
             print(error.localizedDescription)
-            return Results(exhaustiveNbHits: false, hits: [])
+            return nil
         }
     }
 }
