@@ -14,7 +14,7 @@ import Foundation
 
 class NetworkManager: ObservableObject {
         
-    @Published var posts = [Post]()
+    @Published var posts = [Results]()
     
     func fetchData() {
         if let url = URL(string: "https://hn.algolia.com/api/v1/search?tags=front_page") {
@@ -31,8 +31,8 @@ class NetworkManager: ObservableObject {
             }
             
             if let safeData = data {
-                let decodedData = self.parseJSON(safeData)
-                print(decodedData)
+                guard let decodedData = self.parseJSON(safeData) else { return }
+                self.posts.append(decodedData)
             }
         }
         task.resume()
