@@ -7,13 +7,19 @@
 
 import SwiftUI
 
+//class GameSettings: ObservableObject {
+//    @Published var score = 0
+//}
+
 @main
 struct H4X0R_NewsApp: App {
+    
+//    @StateObject var settings = GameSettings()
+    
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                ContentView()
-            }
+            ContentView()
+//            .environmentObject(settings)
         }
     }
 }

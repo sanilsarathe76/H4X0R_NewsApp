@@ -10,23 +10,26 @@ import SwiftUI
 struct CustomList: View {
     
     @Binding var text: String
-    @ObservedObject var networkManager = NetworkManager()
-    
-    var posts = [Results]()
+    var posts: [Results] = []
     
     var body: some View {
-        List(posts) { post in
-            if let title = post.hits?.first?.title {
-                Text(title)
+        NavigationView {
+            List(posts) { post in
+                if let title = post.hits?.first?.title, let point = post.hits?.first?.points {
+                    HStack {
+                        Text(String(point))
+                        Text(title)
+                    }
+                }
             }
+            .navigationBarTitle("H4X0R NEWS")
         }
         
-        TextField("", text: $text)
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.cyan)
+//        TextField("", text: $text)
+//            .padding()
+//            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//            .background(.cyan)
         
-        .navigationBarTitle("H4X0R NEWS")
     }
 }
 
