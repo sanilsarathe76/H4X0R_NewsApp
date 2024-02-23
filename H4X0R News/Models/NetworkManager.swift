@@ -32,7 +32,9 @@ class NetworkManager: ObservableObject {
             
             if let safeData = data {
                 guard let decodedData = self.parseJSON(safeData) else { return }
-                self.posts.append(decodedData)
+                DispatchQueue.main.async {
+                    self.posts.append(decodedData)
+                }
             }
         }
         task.resume()

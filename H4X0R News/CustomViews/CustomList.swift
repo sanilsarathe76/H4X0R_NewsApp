@@ -11,17 +11,21 @@ struct CustomList: View {
     
     @Binding var text: String
     @ObservedObject var networkManager = NetworkManager()
+    
     var posts = [Results]()
     
     var body: some View {
-//        TextField("", text: $text)
-//            .padding()
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            .background(.cyan)
-        
-        List(self.posts) { post in
-            Text(post.hits?.first?.title ?? "Data Not Loading")
+        List(posts) { post in
+            if let title = post.hits?.first?.title {
+                Text(title)
+            }
         }
+        
+        TextField("", text: $text)
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.cyan)
+        
         .navigationBarTitle("H4X0R NEWS")
     }
 }
