@@ -12,7 +12,10 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Hits : Codable {
+struct Hits : Codable, Identifiable {
+    var id: String {
+        return UUID().uuidString
+    }
 	let _highlightResult : _highlightResult?
 	let _tags : [String]?
 	let author : String?

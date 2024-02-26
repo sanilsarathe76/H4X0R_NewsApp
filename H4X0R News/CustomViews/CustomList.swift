@@ -10,12 +10,12 @@ import SwiftUI
 struct CustomList: View {
     
     @Binding var text: String
-    var posts: [Results] = []
+    var posts: [Hits] = []
     
     var body: some View {
         NavigationView {
             List(posts) { post in
-                if let title = post.hits?.first?.title, let point = post.hits?.first?.points {
+                if let title = post.title, let point = post.points {
                     HStack {
                         Text(String(point))
                         Text(title)

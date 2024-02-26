@@ -12,11 +12,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Results : Codable, Identifiable {
-    var id: String {
-        return UUID().uuidString
-    }
-    
+struct Results : Codable {
 	let exhaustive : Exhaustive?
 	let exhaustiveNbHits : Bool?
 	let exhaustiveTypo : Bool?
