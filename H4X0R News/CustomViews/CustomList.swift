@@ -15,10 +15,12 @@ struct CustomList: View {
     var body: some View {
         NavigationView {
             List(posts) { post in
-                if let title = post.title, let point = post.points {
-                    HStack {
-                        Text(String(point))
-                        Text(title)
+                NavigationLink(destination: DetailView(url: post.url)) {
+                    if let title = post.title, let point = post.points {
+                        HStack {
+                            Text(String(point))
+                            Text(title)
+                        }
                     }
                 }
             }
